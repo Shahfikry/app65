@@ -31,10 +31,27 @@ slider.addEventListener('mousemove', (e) =>{
 
     x = e.offsetX
 
-    insideSlider.style.left = `${x - startx}px`;
-
+    insideSlider.style.left = `${x - startx}px`
     
+    checkboundary()
 })
+
+function checkboundary(){
+    let outer = slider.getBoundingClientRect(); 
+    let inner = insideSlider.getBoundingClientRect();
+
+    console.log(inner.width, outer.width, inner.width - outer.width)
+
+    if(parseInt(insideSlider.style.left) > 0) { // left boundary
+        insideSlider.style.left = '0px';
+    }else if(inner.right < 0) { //right boundary  
+        insideSlider.style.left = `-${inner.width}px`
+    }
+
+}
+
+checkboundary()
+
 
 
 
